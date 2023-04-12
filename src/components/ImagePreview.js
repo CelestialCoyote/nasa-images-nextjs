@@ -5,22 +5,24 @@ import Link from 'next/link';
 export default function ImagePreview({ thumbnailUrl, nasaId }) {
 
 	return (
-		<div>
-			<Link as={`/photo/${nasaId}`} href='/photo/[id]'>
-				<div>
-					<Image
-						src={thumbnailUrl}
-						width={250}
-						height={125}
-						style={{
-							maxWidth: "auto",
-							height: "auto",
-						}}
-						alt='thumbnail'
-					/>
-					<div>NASA ID: {nasaId}</div>
-				</div>
-			</Link>
-		</div>
+		<Link className='h-64 m-6' as={`/photo/${nasaId}`} href='/photo/[id]'>
+
+			<Image
+				src={thumbnailUrl}
+				width={320}
+				height={240}
+				className="sm:rounded-t-lg"
+				style={{
+					maxWidth: "auto",
+					height: "100%",
+				}}
+				placeholder="blur"
+				blurDataURL="/spinner.svg"
+				alt='thumbnail'
+			/>
+
+			<div className='text-white mt-4'>NASA ID: {nasaId}</div>
+
+		</Link>
 	);
 };

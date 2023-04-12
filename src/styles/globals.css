@@ -32,13 +32,6 @@ body {
 	padding: 5.0rem 0;
 }
 
-.gridContainer {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	grid-column-gap: 2.0rem;
-	grid-row-gap: 2.0rem;
-}
-
 @media(max-width: 800px) {
 	.gridContainer {
 		display: flex;

@@ -41,17 +41,14 @@ export default function Home({ items }) {
 					</button>
 				</div>
 
-
-				<div className='fade'>
-					<div className='gridContainer'>
-						{photos && photos.map((preview) => (
-							<ImagePreview
-								key={preview.data[0].nasa_id}
-								thumbnailUrl={preview.links[0].href}
-								nasaId={preview.data[0].nasa_id}
-							/>
-						))}
-					</div>
+				<div className='grid grid-cols-4 gap-4'>
+					{photos && photos.map((preview) => (
+						<ImagePreview
+							key={preview.data[0].nasa_id}
+							thumbnailUrl={preview.links[0].href}
+							nasaId={preview.data[0].nasa_id}
+						/>
+					))}
 				</div>
 
 			</main>
