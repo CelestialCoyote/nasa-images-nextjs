@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: 100vh;
+	padding: 0 0.5rem;
+}
+
+.main {
+	align-items: center;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	justify-content: center;
+	padding: 5.0rem 0;
+}
+
+.title {
+	font-size: 4.0rem;
+	line-height: 1.15;
+	margin: 2.0rem 0;
+	text-align: center;
+}
+
+.gridContainer {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-column-gap: 2.0rem;
+	grid-row-gap: 2.0rem;
+}
+
+@media(max-width: 800px) {
+	.gridContainer {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		width: 100%;
+		flex-direction: column;
+	}
+}
+
+.fade {
+	animation: fadeIn ease 5s;
+	-webkit-animation: fadeIn ease 5s;
+	-moz-animation: fadeIn ease 5s;
+	-o-animation: fadeIn ease 5s;
+	-ms-animation: fadeIn ease 5s;
+}
+
+@keframe fadeIn {
+	0% {
+		opacity: 0;;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-webkit-keframe fadeIn {
+	0% {
+		opacity: 0;;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-moz-keframe fadeIn {
+	0% {
+		opacity: 0;;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-o-keframe fadeIn {
+	0% {
+		opacity: 0;;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-ms-keframe fadeIn {
+	0% {
+		opacity: 0;;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.searchInput {
+	border: 2px solid gray;
+	margin: 3.0rem 1.0rem;
+	padding: 1.0rem 1.0rem;
+	width: 50%;
+}
+
+.button {
+	transition: 0.4s;
+	width: 50%;
+	padding: 0.5rem;
+	margin: 1.0rem;
+	background-color: lightgray;
+	color: black;
+	border: 2px solid green;
+}
+
+.button:hover {
+	background-color: lightgreen;
+	color: white;
+}
+
+.button:disabled {
+	opacity: 0.5;
+}
