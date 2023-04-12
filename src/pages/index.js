@@ -8,36 +8,39 @@ export default function Home({ items }) {
 	const [photos, setPhotos] = useState(items);
 
 	return (
-		<div className='container'>
+		<div className='flex flex-col m-4'>
 			<Head>
-				<title></title>
+				<title>NASA API</title>
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
 
 			<main className='main'>
-				<h1 className='title'>Welcome to NASA Gallery</h1>
+				<h1 className='text-blue-500 text-4xl'>Welcome to NASA Gallery</h1>
 
-				<input
-					id='nasaSearch'
-					onChange={(e) => setSearch(e.target.value)}
-					className='searchInput'
-					type='text'
-					placeholder='search for an image'
-				/>
+				<div className='flex flex-row m-8 w-full justify-center'>
+					<input
+						id='nasaSearch'
+						onChange={(e) => setSearch(e.target.value)}
+						className='w-3/4'
+						type='text'
+						placeholder='search for an image'
+					/>
 
-				<button
-					className='button'
-					disabled={search == ""}
-					onClick={async () => {
-						const results = await fetch(`https://images-api.nasa.gov/search?media_type=image&q=${search}`);
-						const preview = await results.json();
+					<button
+						className='bg-blue-700 w-1/4 ml-6'
+						disabled={search == ""}
+						onClick={async () => {
+							const results = await fetch(`https://images-api.nasa.gov/search?media_type=image&q=${search}`);
+							const preview = await results.json();
 
-						setPhotos(await preview.collection.items);
-					}}
-				>
-					Find
-				</button>
+							setPhotos(await preview.collection.items);
+						}}
+					>
+						Find
+					</button>
+				</div>
+
 
 				<div className='fade'>
 					<div className='gridContainer'>

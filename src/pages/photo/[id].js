@@ -13,7 +13,7 @@ export default function photo({ photo }) {
 	console.log(photo);
 
 	return (
-		<div>
+		<div className='flex flex-col items-center m-12'>
 			<div>
 				{router.isFallback ? (
 					<div>Loading  . . .</div>
@@ -21,8 +21,8 @@ export default function photo({ photo }) {
 					<>
 						<Image
 							src={photo}
-							width={960}
-							height={540}
+							width={320}
+							height={240}
 							style={{
 								maxWidth: "100%",
 								height: "auto",
@@ -34,13 +34,13 @@ export default function photo({ photo }) {
 					</>
 				)}
 			</div>
-			<div>
-				<Link href='/'>
-					<div>
-						<button>Go Home</button>
-					</div>
+			{/* <div> */}
+				<Link className='mt-10' href='/'>
+					{/* <div> */}
+						<button className='bg-red-500 border-2 border-yellow-200'>Go Home</button>
+					{/* </div> */}
 				</Link>
-			</div>
+			{/* </div> */}
 		</div>
 	);
 };
@@ -51,6 +51,8 @@ export async function getStaticProps({ params }) {
 	const results = await fetch(`https://images-api.nasa.gov/asset/${nasa_id}`);
 	const previews = await results.json();
 	const photo = await previews.collection.items[0].href;
+
+	console.log(photo);
 
 	return {
 		props: { photo }
