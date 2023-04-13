@@ -3,7 +3,7 @@ import Link from 'next/link';
 import ImagePreview from '../components/ImagePreview';
 
 
-export default function Image({ items }) {
+export default function ImageVideoLibrary({ items }) {
 	const [search, setSearch] = useState('');
 	const [photos, setPhotos] = useState(items);
 
