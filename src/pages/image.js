@@ -1,26 +1,17 @@
-import Head from 'next/head';
-import Link from 'next/link';
 import { useState } from 'react';
+import Link from 'next/link';
 import ImagePreview from '../components/ImagePreview';
 
 
-export default function Home({ items }) {
-	// const [search, setSearch] = useState('');
-	// const [photos, setPhotos] = useState(items);
+export default function Image({ items }) {
+	const [search, setSearch] = useState('');
+	const [photos, setPhotos] = useState(items);
 
 	return (
 		<div className='flex flex-col m-4'>
-			<Head>
-				<title>NASA API</title>
-				<link rel='icon' href='/favicon.ico' />
-			</Head>
 
-			<div>
-				<Link href="/image">Image and Video Library</Link>
-			</div>
-
-			{/* <main className='flex flex-1 flex-col items-center justify-center'>
-				<h1 className='text-blue-500 text-4xl'>Welcome to NASA Gallery</h1>
+			<main className='flex flex-1 flex-col items-center justify-center'>
+				<h1 className='text-blue-500 text-4xl'>NASA Image And Video Library</h1>
 
 				<div className='flex flex-row m-8 w-full justify-center'>
 					<input
@@ -55,18 +46,20 @@ export default function Home({ items }) {
 					))}
 				</div>
 
-			</main> */}
+				<Link href="/">Back to home</Link>
+
+			</main>
 		</div>
 	);
 };
 
 
-// export async function getStaticProps() {
-// 	const results = await fetch("https://images-api.nasa.gov/search?media_type=image");
-// 	const preview = await results.json();
-// 	const items = await preview.collection.items;
+export async function getStaticProps() {
+	const results = await fetch("https://images-api.nasa.gov/search?media_type=image");
+	const preview = await results.json();
+	const items = await preview.collection.items;
 
-// 	return {
-// 		props: { items }
-// 	};
-// };
+	return {
+		props: { items }
+	};
+};

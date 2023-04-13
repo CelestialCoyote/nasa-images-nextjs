@@ -21,8 +21,8 @@ export default function photo({ photo }) {
 					<>
 						<Image
 							src={photo}
-							width={320}
-							height={240}
+							width={960}
+							height={960}
 							style={{
 								maxWidth: "100%",
 								height: "auto",
@@ -34,13 +34,10 @@ export default function photo({ photo }) {
 					</>
 				)}
 			</div>
-			{/* <div> */}
-				<Link className='mt-10' href='/'>
-					{/* <div> */}
-						<button className='bg-red-500 border-2 border-yellow-200'>Go Home</button>
-					{/* </div> */}
-				</Link>
-			{/* </div> */}
+			
+			<Link className='mt-10' href='/'>
+				<button className='bg-red-500 border-2 border-yellow-200'>Go Home</button>
+			</Link>
 		</div>
 	);
 };
