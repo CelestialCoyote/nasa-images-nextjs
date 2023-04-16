@@ -6,7 +6,7 @@ const nextConfig = {
 		domains: ["images-assets.nasa.gov"],
 		path: "/_next/image",
 		loader: "default"
-	}
+	},
 };
 
 
