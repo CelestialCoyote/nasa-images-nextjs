@@ -6,7 +6,7 @@ import axios from 'axios';
 
 export default function Apod() {
 	const [photoData, setPhotoData] = useState(null);
-	//const [isLoading, setLoading] = useState(false);
+	const [isLoading, setLoading] = useState(false);
 
 
 	const res = axios.get(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}`)
@@ -16,8 +16,8 @@ export default function Apod() {
 			//console.log(res.data.media_type);
 		});
 
-	//if (isLoading) return <p>Loading...</p>
-	//if (!photoData) return <p>No photo data</p>
+	if (isLoading) return <p>Loading...</p>
+	if (!photoData) return <p>No photo data</p>
 
 	return (
 		<div className=''>
