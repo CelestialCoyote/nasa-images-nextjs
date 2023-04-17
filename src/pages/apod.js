@@ -1,20 +1,12 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+import Image from 'next/image';
 
 
-//const apiKey = process.env.NASA_API_KEY;
+const apiKey = process.env.NASA_API_KEY;
 
-export default function Apod() {
-	const [photoData, setPhotoData] = useState(null);
+export default function Apod({ apodData }) {
+	const [photoData, setPhotoData] = useState(apodData);
 	const [isLoading, setLoading] = useState(false);
-
-
-	const res = axios.get(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}`)
-		.then(res => {
-			setPhotoData(res.data);
-			console.log(res.data);
-			//console.log(res.data.media_type);
-		});
 
 	if (isLoading) return <p>Loading...</p>
 	if (!photoData) return <p>No photo data</p>
@@ -23,6 +15,19 @@ export default function Apod() {
 		<div className=''>
 			Astronomy Photo of the Day
 
+			<Image
+				src={photoData.hdurl}
+				width={1024}
+				height={1024}
+				className="sm:rounded-t-lg"
+				style={{
+					maxWidth: "auto",
+					height: "100%",
+				}}
+				placeholder="blur"
+				blurDataURL="/spinner.svg"
+				alt='photo of the day'
+			/>
 			<div>
 				<p>{photoData.title}</p>
 				<p>{photoData.date}</p>
@@ -32,4 +37,14 @@ export default function Apod() {
 
 		</div>
 	);
+};
+
+
+export async function getStaticProps() {
+	const results = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
+	const apodData = await results.json();
+
+	return {
+		props: { apodData }
+	};
 };
