@@ -13,8 +13,8 @@ export default function Home() {
 
 			<div className='flex flex-col items-center'>
 				<h1 className='text-3xl mb-8'>NASA API</h1>
-				<Link href="/apod">Astronomy Photo of the Day</Link>
-				<Link href="/image-video-library">Image and Video Library</Link>
+				<Link className='mb-6' href="/apod">Astronomy Photo of the Day</Link>
+				<Link className='mb-6' href="/image-video-library">Image and Video Library</Link>
 			</div>
 
 			

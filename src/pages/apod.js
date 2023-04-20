@@ -12,9 +12,9 @@ export default function Apod({ apodData }) {
 
 	return (
 		<div className=''>
-			Astronomy Photo of the Day
+			<h1 className='text-3xl text-center mt-4 mb-6'>Astronomy Photo of the Day</h1>
 
-			<div className='container p-4 pt-20 mx-auto sm:px-8 lg:pt-10'>
+			<div className=''>
 
 				<div className='grid lg:grid-cols-2 lg:gap-4'>
 					{photoData?.media_type === 'video' ? (
