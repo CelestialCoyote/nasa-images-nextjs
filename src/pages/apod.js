@@ -6,13 +6,24 @@ const apiKey = process.env.NASA_API_KEY;
 
 export default function Apod({ apodData }) {
 	const [photoData, setPhotoData] = useState(apodData);
+	const date = new Date();
 
 
 	if (!photoData) return <p>No photo data</p>
 
 	return (
-		<div className=''>
+		<div className='flex flex-col justify-center'>
 			<h1 className='text-3xl text-center mt-4 mb-6'>Astronomy Photo of the Day</h1>
+
+			<div className='flex justify-center items-center'>
+				<label for="meeting-time">Choose a date:</label>
+				<input
+					className='text-center m-8'
+					type="date"
+					value={date}
+					min="1995-06-16"
+				/>
+			</div>
 
 			<div className=''>
 				{photoData?.media_type === 'video' ? (
@@ -39,10 +50,10 @@ export default function Apod({ apodData }) {
 								// className='object-contain object-center rounded-lg lg:object-top'
 								height={200}
 								width={200}
-								//fill={true}
-								// priority={true}
-								// loading='eager'
-								// quality={100}
+							//fill={true}
+							// priority={true}
+							// loading='eager'
+							// quality={100}
 							/>
 						</a>
 						<div className='hidden lg:sticky lg:block lg:top-10'>
