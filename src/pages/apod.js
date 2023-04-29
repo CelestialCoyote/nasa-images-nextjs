@@ -6,8 +6,8 @@ const apiKey = process.env.NASA_API_KEY;
 
 export default function Apod({ apodData }) {
 	const [photoData, setPhotoData] = useState(apodData);
-	const date = new Date();
-
+	const [selectDate, setSelectDate] = useState(new Date().toLocaleDateString('en-CA'));
+	
 
 	if (!photoData) return <p>No photo data</p>
 
@@ -16,14 +16,32 @@ export default function Apod({ apodData }) {
 			<h1 className='text-3xl text-center mt-4 mb-6'>Astronomy Photo of the Day</h1>
 
 			<div className='flex justify-center items-center'>
-				<label for="meeting-time">Choose a date:</label>
+				<label>Choose a date:</label>
 				<input
-					className='text-center m-8'
+					className='text-center m-8 bg-yellow-300 text-black'
 					type="date"
-					value={date}
+					value={selectDate}
 					min="1995-06-16"
+					max="2023-04-29"
+					placeholder="1995-06-16"
+					onChange={(event) => {
+						//date = event.target.value;
+						setSelectDate(event.target.value);
+						console.log(`Date selected: ${selectDate}`);
+					}}
 				/>
 			</div>
+
+			{/* <div id='search-bar'>
+            <label id='search-label'>Find Song</label>
+            <input
+                id='search-input'
+                ref={searchString}
+                onChange={startSearch}
+                type='text'
+                placeholder='Search by: Song Title, Ablum Name, Artist or Group Name, or Release Date'
+            ></input>
+        </div> */}
 
 			<div className=''>
 				{photoData?.media_type === 'video' ? (
@@ -48,12 +66,12 @@ export default function Apod({ apodData }) {
 								src={photoData.url}
 								alt={photoData.title}
 								// className='object-contain object-center rounded-lg lg:object-top'
-								height={200}
-								width={200}
-							//fill={true}
-							// priority={true}
-							// loading='eager'
-							// quality={100}
+								//height={200}
+								//width={200}
+								fill={true}
+								// priority={true}
+								// loading='eager'
+								// quality={100}
 							/>
 						</a>
 						<div className='hidden lg:sticky lg:block lg:top-10'>
