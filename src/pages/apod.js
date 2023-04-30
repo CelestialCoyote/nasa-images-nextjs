@@ -5,11 +5,17 @@ import Image from 'next/image';
 const apiKey = process.env.NASA_API_KEY;
 
 export default function Apod({ apodData }) {
+	const todaysDate = new Date().toLocaleDateString('en-CA');
 	const [photoData, setPhotoData] = useState(apodData);
-	const [selectDate, setSelectDate] = useState(new Date().toLocaleDateString('en-CA'));
-	
+	const [selectDate, setSelectDate] = useState(todaysDate);
+
+	console.log(`Date selected: ${selectDate}`);
 
 	if (!photoData) return <p>No photo data</p>
+
+	// useEffect(() => {
+	// 	fetch(`/api/hello&date={selectDate}`);
+	// }, [selectDate]);
 
 	return (
 		<div className='flex flex-col justify-center'>
@@ -18,30 +24,18 @@ export default function Apod({ apodData }) {
 			<div className='flex justify-center items-center'>
 				<label>Choose a date:</label>
 				<input
-					className='text-center m-8 bg-yellow-300 text-black'
+					className='text-center m-8 bg-slate-500 text-black'
 					type="date"
 					value={selectDate}
 					min="1995-06-16"
 					max="2023-04-29"
 					placeholder="1995-06-16"
 					onChange={(event) => {
-						//date = event.target.value;
 						setSelectDate(event.target.value);
-						console.log(`Date selected: ${selectDate}`);
+						GetPhoto();
 					}}
 				/>
 			</div>
-
-			{/* <div id='search-bar'>
-            <label id='search-label'>Find Song</label>
-            <input
-                id='search-input'
-                ref={searchString}
-                onChange={startSearch}
-                type='text'
-                placeholder='Search by: Song Title, Ablum Name, Artist or Group Name, or Release Date'
-            ></input>
-        </div> */}
 
 			<div className=''>
 				{photoData?.media_type === 'video' ? (
@@ -71,7 +65,7 @@ export default function Apod({ apodData }) {
 								fill={true}
 								// priority={true}
 								// loading='eager'
-								// quality={100}
+								quality={100}
 							/>
 						</a>
 						<div className='hidden lg:sticky lg:block lg:top-10'>
@@ -118,14 +112,3 @@ export async function getServerSideProps() {
 		props: { apodData }
 	};
 };
-
-
-// export async function getStaticProps() {
-// 	const results = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
-// 	//const results = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=2021-01-04`);
-// 	const apodData = await results.json();
-
-// 	return {
-// 		props: { apodData }
-// 	};
-// };
