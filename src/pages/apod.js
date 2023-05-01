@@ -2,8 +2,6 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 
-const apiKey = process.env.NASA_API_KEY;
-
 export default function Apod({ apodData }) {
 	const todaysDate = new Date().toLocaleDateString('en-CA');
 	const [photoData, setPhotoData] = useState(apodData);
@@ -13,10 +11,6 @@ export default function Apod({ apodData }) {
 
 	if (!photoData) return <p>No photo data</p>
 
-	// useEffect(() => {
-	// 	fetch(`/api/hello&date={selectDate}`);
-	// }, [selectDate]);
-
 	return (
 		<div className='flex flex-col justify-center'>
 			<h1 className='text-3xl text-center mt-4 mb-6'>Astronomy Photo of the Day</h1>
@@ -24,6 +18,22 @@ export default function Apod({ apodData }) {
 			<div className='flex justify-center items-center'>
 				<label>Choose a date:</label>
 				<input
+					className='text-center m-8 bg-slate-500 text-black'
+					type="text"
+					value={selectDate}
+					min="1995-06-16"
+					max="2023-04-29"
+					placeholder="1995-06-16"
+					onChange={(event) => {
+						setSelectDate(event.target.value);
+					}}
+				/>
+				<button
+					onClick={res => fetch(`/api/apod${`&date=${selectDate}`}`)}
+				>
+					Get Photo
+				</button>
+				{/* <input
 					className='text-center m-8 bg-slate-500 text-black'
 					type="date"
 					value={selectDate}
@@ -34,7 +44,7 @@ export default function Apod({ apodData }) {
 						setSelectDate(event.target.value);
 						GetPhoto();
 					}}
-				/>
+				/> */}
 			</div>
 
 			<div className=''>
@@ -59,12 +69,11 @@ export default function Apod({ apodData }) {
 							<Image
 								src={photoData.url}
 								alt={photoData.title}
-								// className='object-contain object-center rounded-lg lg:object-top'
-								//height={200}
-								//width={200}
-								fill={true}
+								className='object-contain object-center rounded-lg lg:object-top'
+								height={400}
+								width={400}
+								//fill={true}
 								// priority={true}
-								// loading='eager'
 								quality={100}
 							/>
 						</a>
@@ -104,8 +113,8 @@ export default function Apod({ apodData }) {
 
 
 export async function getServerSideProps() {
-	const results = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
-	//const results = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=2021-01-04`);
+	const results = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}`);
+	//const results = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}&date=2021-01-04`);
 	const apodData = await results.json();
 
 	return {
