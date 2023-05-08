@@ -9,6 +9,12 @@ export default function Apod({ apodData }) {
 
 	console.log(`Date selected: ${selectDate}`);
 
+	const searchDate = () => {
+		res => fetch(`/api/apod${`?date=${selectDate}`}`)
+						// .then(setPhotoData(res.json()))
+	};
+
+
 	if (!photoData) return <p>No photo data</p>
 
 	return (
@@ -29,7 +35,8 @@ export default function Apod({ apodData }) {
 					}}
 				/>
 				<button
-					onClick={res => fetch(`/api/apod${`&date=${selectDate}`}`)}
+					// onClick={searchDate}
+					onClick={res => fetch(`/api/apod${`?date=${selectDate}`}`)}
 				>
 					Get Photo
 				</button>
