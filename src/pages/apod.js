@@ -38,13 +38,15 @@ export default function Apod({ apodData }) {
 					// onClick={searchDate}
 					onClick={
 						res => {
-							fetch(`/api/apod${`?date=${selectDate}`}`);
+							//fetch(`/api/apod${`?date=${selectDate}`}`);
+							fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}&date=1995-06-16`);
 
 							// if (!res.ok) {
 							// 	throw new Error("Error fetching data");
 							// }
-							const apodData = res.json();
-							setPhotoData(apodData);
+							//const apodData = res.json();
+							console.log(res);
+							//setPhotoData(apodData);
 						}
 					}
 				>
