@@ -7,12 +7,22 @@ export default function Apod({ apodData }) {
 	const [photoData, setPhotoData] = useState(apodData);
 	const [selectDate, setSelectDate] = useState(todaysDate);
 
-	console.log(`Date selected: ${selectDate}`);
 
-	const searchDate = () => {
-		res => fetch(`/api/apod${`?date=${selectDate}`}`)
-		// .then(setPhotoData(res.json()))
-	};
+	const getPhoto = async () => {
+		try {
+			const response = await fetch(
+				`https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}&date=1999-07-15`,
+				{ headers: { accept: 'application/json' } }
+			);
+
+			const apodData = await response.json();
+			console.log(apodData);
+			setPhotoData(apodData);
+			
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 	if (!photoData) return <p>No photo data</p>
 
@@ -22,9 +32,9 @@ export default function Apod({ apodData }) {
 			<h1 className='text-3xl text-center mt-4 mb-6'>Astronomy Photo of the Day</h1>
 
 			<div className='flex justify-center items-center'>
-		 		<label>Choose a date:</label>
-		 		<input
-		 			className='text-center m-8 bg-slate-500 text-black'
+				<label>Choose a date:</label>
+				<input
+					className='text-center m-8 bg-slate-500 text-black'
 					type="text"
 					value={selectDate}
 					min="1995-06-16"
@@ -35,20 +45,7 @@ export default function Apod({ apodData }) {
 					}}
 				/>
 				<button
-					// onClick={searchDate}
-					onClick={
-						res => {
-							//fetch(`/api/apod${`?date=${selectDate}`}`);
-							fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}&date=1995-06-16`);
-
-							// if (!res.ok) {
-							// 	throw new Error("Error fetching data");
-							// }
-							//const apodData = res.json();
-							console.log(res);
-							//setPhotoData(apodData);
-						}
-					}
+					onClick={getPhoto}
 				>
 					Get Photo
 				</button>
@@ -136,6 +133,7 @@ export async function getServerSideProps() {
 	//const results = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}&date=2021-01-04`);
 	const apodData = await results.json();
 
+	console.log("First fetch");
 	console.log(apodData);
 
 	return {
