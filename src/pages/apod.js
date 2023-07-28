@@ -10,10 +10,12 @@ export default function Apod({ apodData }) {
 
 	const getPhoto = async () => {
 		try {
-			const response = await fetch(
-				`https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}&date=1999-07-15`,
-				{ headers: { accept: 'application/json' } }
-			);
+			// const response = await fetch(
+			// 	`https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}&date=1999-07-15`,
+			// 	{ headers: { accept: 'application/json' } }
+			// );
+
+			const response = await fetch("/api/apod/");
 
 			const apodData = await response.json();
 			console.log(apodData);

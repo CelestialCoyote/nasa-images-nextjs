@@ -58,7 +58,8 @@ export default async function handler(req, res) {
 	console.log(`query: ${req.query}`)
 
 	if (!query.date) {
-		url = `https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}`;
+		//url = `https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}`;
+		url = `https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}&date=2012-07-15`;
 	};
 
 	// if (query.date) {
