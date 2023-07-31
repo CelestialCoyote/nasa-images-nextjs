@@ -11,24 +11,16 @@ export default function Apod({ apodData }) {
 
 	const getPhoto = async () => {
 		try {
-			const response = await fetch(`/api/apod/&date=${selectDate}`);
-
+			const response = await fetch(`/api/apod/?date=${selectDate}`);
 			const apodData = await response.json();
-			console.log(apodData);
+			
+			//console.log(apodData);
 			setPhotoData(apodData);
-
 		} catch (error) {
 			console.log(error);
 		}
 	}
-
-	const FetchPhotoFromApi = date => {
-		//fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=YOUR_UNIQUE_KEY`)
-		fetch("/api/apod/")
-			.then(response => response.json())
-			.then(photoData => setPhotoData({ photo: photoData }));
-	};
-
+	
 	if (!photoData) return <p>No photo data</p>
 
 	// return (

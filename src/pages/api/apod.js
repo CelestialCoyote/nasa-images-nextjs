@@ -50,6 +50,19 @@
 // };
 
 
+// import { NextApiRequest, NextApiResponse } from "next";
+
+// export default async (request: NextApiRequest, response: NextApiResponse) => {
+//   const {
+//     query: { name, keyword },
+//     method,
+//   } = request;
+//   console.log(name, keyword, method);
+
+//   // do nothing fancy and simply return a string concatenation
+//   return response.status(200).json({ query: name + " " + keyword });
+// };
+
 
 export default async function handler(req, res) {
 	const { query, method } = req;
@@ -58,6 +71,7 @@ export default async function handler(req, res) {
 	console.log(`query: ${req.query}`)
 
 	if (!query.date) {
+		console.log("no query seen");
 		url = `https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}`;
 	};
 
