@@ -46,7 +46,7 @@ export default function Apod({ apodData }) {
 			</div>
 
 			{/* <div className='container p-4 pt-20 mx-auto sm:px-8 lg:pt-10'> */}
-			<div className='grid lg:grid-cols-2 lg:gap-4'>
+			<div className='grid lg:grid-cols-2 lg:gap-4 p-8'>
 				{data?.media_type === 'video' ? (
 					<div className='relative h-[50vh] mb-4 lg:mb-0'>
 						<iframe
@@ -61,13 +61,12 @@ export default function Apod({ apodData }) {
 					</div>
 				) : (
 					<div className='
-						flex
-						align-center
-						h-[50vh]
+						
+						border-2
 						rounded-lg
 						mb-4
 						lg:mb-0
-						lg:h-auto
+						
 						focus-within:outline-none
 						focus-within:ring-2
 						focus-within:ring-offset-0
@@ -90,7 +89,7 @@ export default function Apod({ apodData }) {
 								//width={500}
 								//width={'auto'}
 								//fill={true}
-								priority={true}
+								//priority={true}
 								//loading='eager'
 								//quality={100}
 								width="0"
