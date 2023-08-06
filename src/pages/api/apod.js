@@ -68,7 +68,7 @@ export default async function handler(req, res) {
 	const { query, method } = req;
 	let url = '';
 
-	console.log(`query: ${req.query}`)
+	//console.log(`query: ${req.query}`)
 
 	if (!query.date) {
 		console.log("no query seen");
@@ -84,5 +84,5 @@ export default async function handler(req, res) {
 		.then(response => response.json());
 
 	res.json(data);
-	console.log(data);
+	//console.log(data);
 };

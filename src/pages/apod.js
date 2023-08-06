@@ -9,14 +9,21 @@ export default function Apod({ apodData }) {
 
 
 	const getPhoto = async () => {
-		try {
-			const response = await fetch(`/api/apod/?date=${selectDate}`);
-			const apodData = await response.json();
+		fetch(`/api/apod/?date=${selectDate}`)
+			.then((res) => res.json())
+			.then((data) => {
+				setData(data)
+				//setLoading(false)
+			})
 
-			setData(apodData);
-		} catch (error) {
-			console.log(error);
-		}
+		// try {
+		// 	const response = await fetch(`/api/apod/?date=${selectDate}`);
+		// 	const apodData = await response.json();
+
+		// 	setData(apodData);
+		// } catch (error) {
+		// 	console.log(error);
+		// }
 	}
 
 	if (!data) return <p>No photo data</p>
@@ -61,12 +68,12 @@ export default function Apod({ apodData }) {
 					</div>
 				) : (
 					<div className='
-						
-						border-2
+						flex
+						items-center
+						justify-center
 						rounded-lg
 						mb-4
 						lg:mb-0
-						
 						focus-within:outline-none
 						focus-within:ring-2
 						focus-within:ring-offset-0
@@ -84,17 +91,9 @@ export default function Apod({ apodData }) {
 							<Image
 								src={data?.url}
 								alt={data?.title}
-								//className='object-contain object-center rounded-lg lg:object-top'
-								//height={200}
-								//width={500}
-								//width={'auto'}
-								//fill={true}
-								//priority={true}
-								//loading='eager'
-								//quality={100}
 								width="0"
 								height="0"
-								sizes="100vw"
+								sizes="100vh"
 								className="w-full h-auto"
 							/>
 						</a>
